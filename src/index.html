@@ -6,10 +6,48 @@
     <title>Todo App</title>
 </head>
 <body>
+    <!--  -->
     <header class="appHeader">
         <h1> ToDoLista </h1>
     </header>
-    <div class="menu"> menu </div>
+    <!--  -->
+
+
+    <div class="menu">
+        <form id="newTodoNote">
+            <fieldset>
+                <legend> <h2> Add New Note </h2></legend>
+                <div class="input">
+                    <label for="title"> Title </label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="input">
+                    <label for="description"> Enter assignment description: </label>
+                    <textarea  id="description" name="description" rows="8" cols="28"></textarea>
+                </div>
+                <div class="input">
+                    <label for="date"> due date: </label>
+                    <input type="datetime-local" id="date" required>
+                </div>
+                <div class="input">
+                    <legend> how important is it? </legend>
+                    <label for="super"> Super </label>
+                    <input type="radio" name="priority" id="super" value="super" />
+                    <label for="normal"> Normal </label>
+                    <input type="radio" name="priority" id="normal" value="normal" />
+                    <label for="noHurry"> No hurry </label>
+                    <input type="radio" name="priority" id="noHurry" value="noHurry" />
+                </div>
+                <button type="button" class=""> Add </button>
+            </fieldset>
+            
+        </form>
+
+    </div>
+    <!--  -->
+
+
+
     <div class="notesTobeChanged">
         todos
     </div>

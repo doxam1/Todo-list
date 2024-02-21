@@ -1,1 +1,1 @@
-body{margin:0;display:grid;height:100svh;grid-template:1fr 6fr/1fr 4fr;gap:.1rem}body .appHeader{display:flex;justify-content:center;align-items:center}body .menu{grid-area:2/1/-1/2}body .notesTobeChanged{grid-area:1/2/-1/-1}
+body{margin:0;display:grid;height:100svh;grid-template:1fr 6fr/1fr 4fr;gap:.1rem}body .appHeader{display:flex;justify-content:center;align-items:center}body .menu{grid-area:2/1/-1/2}body .menu #newTodoNote fieldset{display:flex;flex-direction:column;gap:1rem;border:none}body .notesTobeChanged{grid-area:1/2/-1/-1}
