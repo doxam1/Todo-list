@@ -1,3 +1,5 @@
+$gray_active : #dfdada;
+
 body {
     margin: 0;
     display: grid;
@@ -25,7 +27,32 @@ body {
         }
     }
 
-    & .notesTobeChanged {
+    & .allProjects {
         grid-area: 1 / 2 / -1 / -1;
+
+        & button{ //to add an active pseudo class of active. -- will need some jS.
+            background-color: $gray_active; /// to be changed on each click, like a library.
+            border: none;
+            cursor: pointer;
+            height: 40px;
+            width: 120px;
+            border-radius: 12px 12px 0px 0px;
+        }
+
+        & .ProjectTodoNotes {
+            background-color: $gray_active;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+
+            & .projectDiv {
+                border: 1px solid green;
+            }
+
+        }
+
+        
     }
 }
