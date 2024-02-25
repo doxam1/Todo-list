@@ -9,17 +9,15 @@ projectName.addEventListener('change', (e) => {
         const newProjectOption = document.createElement('option');
         newProjectOption.textContent = newProjectName;
         newProjectOption.setAttribute ('value', newProjectName)
-        projectName.appendChild(newProjectOption);
+        projectName.insertBefore(newProjectOption, projectName.children[0]);
         projectName.value = newProjectOption.value;
 
         const projectNavBtn = document.createElement('button');
         projectNavBtn.textContent = `${newProjectName}`
         projectNavBtn.classList.add('projectBtn', `${newProjectName}`);
         projectsNavBtns.appendChild(projectNavBtn);
-        let projectHeaderBtnLibrary = document.querySelectorAll('.projectBtn');
-        
-        render(projectHeaderBtnLibrary);
-
+        let projectHeaderBtnLibrary = document.querySelectorAll('.projectBtn');        
+        render();
     }
 })
 
