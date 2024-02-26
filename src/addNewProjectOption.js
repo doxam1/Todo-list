@@ -16,7 +16,6 @@ projectName.addEventListener('change', (e) => {
         projectNavBtn.textContent = `${newProjectName}`
         projectNavBtn.classList.add('projectBtn', `${newProjectName}`);
         projectsNavBtns.appendChild(projectNavBtn);
-        let projectHeaderBtnLibrary = document.querySelectorAll('.projectBtn');        
         render();
     }
 })
