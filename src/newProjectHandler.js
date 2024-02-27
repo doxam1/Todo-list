@@ -1,5 +1,6 @@
 import AddToProject from "./defaultProject";
 import { render } from './index'
+import { validateForm } from './formValidation'
 
 const addNewProjectBtn = document.querySelector('.addNewProjectBtn');
 
@@ -14,6 +15,7 @@ const NewProjectName = document.querySelector("#projectName");
 
 addNewProjectBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     const newProjectImportance = document.querySelector('input[name="priority"]:checked').value; /// need to get it after user press and change priority - not on load.
     const newTodo = `<h1> ${NewProjectTitle.value} </h1> 
                      <p> ${NewProjectDescription.value} </p>
@@ -30,3 +32,5 @@ addNewProjectBtn.addEventListener('click', (e) => {
 // create an object, the key name might be (title? projectname? todonote?), the value might be the innerHtml for every note?
 // so i can save the object every time and it will reload automatically every time?
 // 
+
+// i will need to change the innerHtml to text or something because this way the page is open to attacks. will use it for now for easiness. 
