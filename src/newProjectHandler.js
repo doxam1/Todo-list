@@ -1,6 +1,6 @@
 import AddToProject from "./defaultProject";
-import { render } from './index'
-import { validateForm } from './formValidation'
+import { render } from './index';
+import { validateForm } from './formValidation';
 
 const addNewProjectBtn = document.querySelector('.addNewProjectBtn');
 
@@ -19,7 +19,7 @@ addNewProjectBtn.addEventListener('click', (e) => {
     const newProjectImportance = document.querySelector('input[name="priority"]:checked').value; /// need to get it after user press and change priority - not on load.
     const newTodo = `<h1> ${NewProjectTitle.value} </h1> 
                      <p> ${NewProjectDescription.value} </p>
-                     <div> Due Date: ${NewProjectDueDate.value} </div>
+                     <div> Due Date: ${NewProjectDueDate.value.split('T')} </div>
                      <div> Priority: ${newProjectImportance}</div>
                      <div> project Name: ${NewProjectName.options[NewProjectName.selectedIndex].text}
                      ` //fix due date with datefn?

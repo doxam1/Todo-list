@@ -2,14 +2,21 @@ const NewProjectTitle = document.getElementById('title');
 const NewProjectDescription = document.getElementById('description');
 const NewProjectDueDate = document.querySelector('#date');
 const addNewProjectBtn = document.querySelector('.addNewProjectBtn');
+const errorMsg = document.querySelector('.errorMsg');
 export { validateForm };
 
 function validateForm() {
     if (NewProjectTitle.value == '') {
-        alert ('please enter title')
+        errorMsg.textContent = 'please enter title';
+        setTimeout(() => {
+            errorMsg.textContent = '';            
+        }, 1000);
         return false;
     } else if (NewProjectDescription.value == '') {
-        alert('please enter description');
+        errorMsg.textContent = 'please enter description';
+        setTimeout(() => {
+            errorMsg.textContent = '';            
+        }, 1000);
         return false;
     } 
     else {

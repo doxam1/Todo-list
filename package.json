@@ -17,5 +17,8 @@
   },
   "keywords": [],
   "author": "e.b.",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "date-fns": "^3.3.1"
+  }
 }
