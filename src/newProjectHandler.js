@@ -17,13 +17,27 @@ addNewProjectBtn.addEventListener('click', (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     const newProjectImportance = document.querySelector('input[name="priority"]:checked').value; /// need to get it after user press and change priority - not on load.
+    let divBorderColorFromPriority = '';
+    switch (newProjectImportance) {
+        case 'Normal':
+            divBorderColorFromPriority = 'black';
+            break;
+        case 'No hurry':
+            divBorderColorFromPriority = 'green';
+            break;
+        case 'Super important':
+            divBorderColorFromPriority = 'red';
+            break;    
+        //default:
+        //    break;
+    }
     const newTodo = `<h1> ${NewProjectTitle.value} </h1> 
                      <p> ${NewProjectDescription.value} </p>
                      <div> Due Date: ${NewProjectDueDate.value.split('T')} </div>
                      <div> Priority: ${newProjectImportance}</div>
                      <div> project Name: ${NewProjectName.options[NewProjectName.selectedIndex].text}
                      ` //fix due date with datefn?
-    AddToProject(newTodo);
+    AddToProject(newTodo, divBorderColorFromPriority);
     render();
 })
 

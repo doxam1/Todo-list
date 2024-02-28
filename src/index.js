@@ -19,16 +19,16 @@ function render() {
         const todoDivsTotal = document.querySelectorAll('.todoDiv');
         todoDivsTotal.forEach((todoDiv)=>{
             if (projectBtn.classList.contains('allTodoNotesFromAllProjects')){
-                todoDiv.setAttribute('style', 'display:block');
+                todoNote.style.display = 'block';
                 return;
             }
             const projectBtnLastClassName = projectBtn.className.split(' ').slice(-1)[0];
             const todoDivsSameClassAsProjectBtn = document.querySelectorAll(`div.${projectBtnLastClassName}`);
             todoDivsSameClassAsProjectBtn.forEach((todoNote) =>{
-                todoNote.setAttribute('style', 'display:block');
+                todoNote.style.display = 'block';
             })
             if (!todoDiv.classList.contains(`${projectBtnLastClassName}`)) {
-                todoDiv.setAttribute('style', 'display:none');
+                todoNote.style.display = 'none';
             }
     })}})
 }
