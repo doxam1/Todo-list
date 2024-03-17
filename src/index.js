@@ -40,11 +40,11 @@ function render() {
 
 // this function is for rendering a saved version of the object of todo's. need to learn about local storage + saving the library functions.
 
-const renderBtn = document.querySelector('.allTodoNotesFromAllProjects'); // delete this btn after.  
+const renderBtn = document.querySelector('.allTodoNotesFromAllProjects');  
 renderBtn.onclick = () =>{
-    // console.log(Todo.allTodosNotes)
     const ProjectTodoNotes = document.querySelector('.ProjectTodoNotes');
     ProjectTodoNotes.innerHTML = '';
+    console.log(Todo.allTodosNotes)
     Todo.allTodosNotes.forEach((todo, index) => {        
         AddToProject(Todo.allTodosNotes[index]);
     })    

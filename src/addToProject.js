@@ -1,3 +1,5 @@
+import { removeNoteFromProject } from "./removeNoteFromProject";
+
 export default function AddToProject(NewTodo) {
     const newTodoDiv = document.createElement('div');   
     newTodoDiv.classList.add('todoDiv', `${NewTodo.project}`);
@@ -17,9 +19,13 @@ export default function AddToProject(NewTodo) {
     const projectNameDiv = document.createElement('div');
     projectNameDiv.textContent = 'Project Name: ' + NewTodo.project;
 
+    const delNoteBtn = document.createElement('button');
+    delNoteBtn.classList.add('delNoteBtn');
+    delNoteBtn.textContent = 'X'
+
     //                  <div> project Name: ${NewProjectName.options[NewProjectName.selectedIndex].text}
 
-    newTodoDiv.append(title, description, dueDate, priority, projectNameDiv);
+    newTodoDiv.append(delNoteBtn, title, description, dueDate, priority, projectNameDiv);
 
     let divBorderColorFromPriority = '';
     switch (NewTodo.priority) {
@@ -36,7 +42,9 @@ export default function AddToProject(NewTodo) {
         //    break;
     }
 
-
+    delNoteBtn.onclick = () => {
+        removeNoteFromProject(newTodoDiv);
+    }
     newTodoDiv.style.boxShadow = `1px 1px 4px 1px ${divBorderColorFromPriority}`;
     document.querySelector('.ProjectTodoNotes').appendChild(newTodoDiv);
     // to change to using the object instead

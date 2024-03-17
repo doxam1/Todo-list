@@ -60,6 +60,13 @@ body {
             & .todoDiv {
                 // box-shadow: 1px 1px 4px black;
                 padding: 1rem;
+                position: relative;
+
+                .delNoteBtn {
+                    position: absolute;
+                    top: 2%;
+                    right: 5%;
+                }
             }
 
         }
