@@ -20,3 +20,9 @@ projectName.addEventListener('change', (e) => {
     }
 })
 
+
+// i will need to make an object constructor/class/factory function for making the nav project btns append to an array?
+// or maybe just an array of somesort.
+// i'll also need to make an array on the options manu in the form for the projects.
+
+

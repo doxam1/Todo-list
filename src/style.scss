@@ -35,7 +35,7 @@ body {
             // border-bottom: 1px ridge black;
         }
 
-        & button{ //to add an active pseudo class of active. -- will need some jS.
+        & button.projectBtn { //to add an active pseudo class of active. -- will need some jS.
             background-color: $white;/// to be changed on each click, like a library.
             border: none;
             border-bottom: 1px ridge black;
