@@ -12,7 +12,6 @@ export { render };
 render();
 
 
-// new Todo('test', 'ssss',"2024-03-23T17:20", 'normal', 'Default').pushToTodoNotes();
 // console.log(Todo.allTodosNotes)
 // the render will need to change so i can loop thru the todo array and render it again on every change.
 
@@ -23,6 +22,11 @@ function render() {
         const todoDivsTotal = document.querySelectorAll('.todoDiv');
         todoDivsTotal.forEach((todoDiv)=>{
             if (projectBtn.classList.contains('allTodoNotesFromAllProjects')){
+                const ProjectTodoNotes = document.querySelector('.ProjectTodoNotes');
+                ProjectTodoNotes.innerHTML = '';
+                Todo.allTodosNotes.forEach((todo, index) => {        
+                AddToProject(Todo.allTodosNotes[index]);
+                })    
                 todoDiv.style.display = 'block';
                 return;
             }

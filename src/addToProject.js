@@ -43,7 +43,7 @@ export default function AddToProject(NewTodo) {
     }
 
     delNoteBtn.onclick = () => {
-        removeNoteFromProject(newTodoDiv);
+        removeNoteFromProject(newTodoDiv, title.textContent, description.textContent, NewTodo.project);
     }
     newTodoDiv.style.boxShadow = `1px 1px 4px 1px ${divBorderColorFromPriority}`;
     document.querySelector('.ProjectTodoNotes').appendChild(newTodoDiv);

@@ -6,6 +6,8 @@ const errorMsg = document.querySelector('.errorMsg');
 export { validateForm };
 
 function validateForm() {
+    errorMsg.style.color = 'red';
+    errorMsg.style.textAlign = 'center';
     if (NewProjectTitle.value == '') {
         errorMsg.textContent = 'please enter title';
         setTimeout(() => {
