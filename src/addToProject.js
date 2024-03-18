@@ -23,8 +23,6 @@ export default function AddToProject(NewTodo) {
     delNoteBtn.classList.add('delNoteBtn');
     delNoteBtn.textContent = 'X'
 
-    //                  <div> project Name: ${NewProjectName.options[NewProjectName.selectedIndex].text}
-
     newTodoDiv.append(delNoteBtn, title, description, dueDate, priority, projectNameDiv);
 
     let divBorderColorFromPriority = '';

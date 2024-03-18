@@ -6,7 +6,20 @@ import {render} from './index'
 
 // might do a factory function - will check for a valid name with set function, and retrun the array.
 
-const projectsArray = ['test', 'another']; //will load from local Storage.
+let projectsArray = [];
+
+if (!JSON.parse(localStorage.getItem('projectsArray'))) {
+    projectsArray = [];    
+} else {
+    projectsArray = JSON.parse(localStorage.getItem('projectsArray'));
+}
+// console.log()
+
+// () => {if (JSON.parse(localStorage.getItem('projectsArray'))) {
+//     return projectsArray = JSON.parse(localStorage.getItem('projectsArray'));
+// } else return projectsArray = [];
+// }; 
+//will load from local Storage.
 
 // loading all the project from array on page load.
 projectsArray.forEach((project) => {
@@ -22,7 +35,7 @@ projectsArray.forEach((project) => {
         projectsNavBtns.appendChild(projectNavBtn);
 
         document.getElementById('DefaultProjectOption').selected = true; // for default to be selected on page load.
-        
+
         render();
 
 })
@@ -36,6 +49,8 @@ projectName.addEventListener('change', (e) => {
         //add validate name, push to array, save array local storage? change prompt to Dom element.
 
         projectsArray.push(newProjectName);
+        localStorage.setItem('projectsArray', JSON.stringify(projectsArray)); // send to local storage after change.
+
         console.log(projectsArray);
 
         const newProjectOption = document.createElement('option');
@@ -49,6 +64,7 @@ projectName.addEventListener('change', (e) => {
         projectNavBtn.classList.add('projectBtn', `${newProjectName}`);
         projectsNavBtns.appendChild(projectNavBtn);
         render();
+        
     }
 })
 

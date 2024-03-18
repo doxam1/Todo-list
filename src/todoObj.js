@@ -8,9 +8,17 @@ export default class Todo {
     }
     static allTodosNotes = new Array();
 
-    get allTodosNotes() {
-        return this.allTodosNotes;
+    static allTodosNoteLocalStorage(fromLocalStorage) {
+        if (fromLocalStorage) {
+            this.allTodosNotes = fromLocalStorage;
+        } else {
+            this.allTodosNotes = [];
+        }
     }
+
+    // get allTodosNotes() {
+    //     return this.allTodosNotes;
+    // }
     
     pushToTodoNotes() {        
         Todo.allTodosNotes.push({title:this.title, description:this.description, dueDate:this.dueDate, priority:this.priority, project:this.project});
