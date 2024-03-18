@@ -2,6 +2,8 @@ const projectName = document.getElementById('projectName');
 const projectsNavBtns = document.querySelector('.projectsNavBtns');
 
 import {render} from './index'
+import Todo from './todoObj';
+import { removeNoteFromProject } from './removeNoteFromProject';
 
 
 // might do a factory function - will check for a valid name with set function, and retrun the array.
@@ -13,16 +15,15 @@ if (!JSON.parse(localStorage.getItem('projectsArray'))) {
 } else {
     projectsArray = JSON.parse(localStorage.getItem('projectsArray'));
 }
-// console.log()
-
-// () => {if (JSON.parse(localStorage.getItem('projectsArray'))) {
-//     return projectsArray = JSON.parse(localStorage.getItem('projectsArray'));
-// } else return projectsArray = [];
-// }; 
-//will load from local Storage.
-
 // loading all the project from array on page load.
-projectsArray.forEach((project) => {
+renderProjectsArray();
+
+function renderProjectsArray(){
+    projectsNavBtns.innerHTML = `<button class="projectBtn allTodoNotesFromAllProjects"> All Notes </button>
+                                 <button class="projectBtn Default"> Default project </button>`    
+    projectName.innerHTML = `<option value="Default" id="DefaultProjectOption">Default</option>
+                             <option value="newProject">New Project...</option>`
+    projectsArray.forEach((project) => {
     const newProjectOption = document.createElement('option');
         newProjectOption.textContent = project;
         newProjectOption.setAttribute ('value', project)
@@ -32,13 +33,34 @@ projectsArray.forEach((project) => {
         const projectNavBtn = document.createElement('button');
         projectNavBtn.textContent = `${project}`
         projectNavBtn.classList.add('projectBtn', `${project}`);
-        projectsNavBtns.appendChild(projectNavBtn);
 
-        document.getElementById('DefaultProjectOption').selected = true; // for default to be selected on page load.
+        const delBtnForProject = document.createElement('button');
+        delBtnForProject.textContent = 'X';
+        projectNavBtn.appendChild(delBtnForProject);
+
+        projectsNavBtns.appendChild(projectNavBtn);
+        delBtnForProject.onclick =()=>{
+            projectsNavBtns.removeChild(projectNavBtn);
+            projectsArray.splice(projectsArray.indexOf(project), 1);
+            localStorage.setItem('projectsArray', JSON.stringify(projectsArray));
+            renderProjectsArray();
+
+            //// i want to delete all notes on project if i delete the project btn on nav bar.
+
+            // const todoDiv = document.querySelectorAll('.todoDiv');
+            // todoDiv.forEach(todo => {
+            //     console.log(todo.classList.contains(project));
+            //     if (todo.classList.contains(project)){
+            //         document.querySelector('.ProjectTodoNotes').removeChild(todo);
+            //     }
+            // })
+            renderProjectsArray();
+        }
 
         render();
 
 })
+}
 
 
 // addding new project. i can just push the new project to the array and the render the function above. ^
@@ -51,22 +73,9 @@ projectName.addEventListener('change', (e) => {
         projectsArray.push(newProjectName);
         localStorage.setItem('projectsArray', JSON.stringify(projectsArray)); // send to local storage after change.
 
-        console.log(projectsArray);
+        renderProjectsArray();
+    }});
 
-        const newProjectOption = document.createElement('option');
-        newProjectOption.textContent = newProjectName;
-        newProjectOption.setAttribute ('value', newProjectName)
-        projectName.insertBefore(newProjectOption, projectName.children[0]);
-        projectName.value = newProjectOption.value;
-
-        const projectNavBtn = document.createElement('button');
-        projectNavBtn.textContent = `${newProjectName}`
-        projectNavBtn.classList.add('projectBtn', `${newProjectName}`);
-        projectsNavBtns.appendChild(projectNavBtn);
-        render();
-        
-    }
-})
 
 
 // i will need to make an object constructor/class/factory function for making the nav project btns append to an array?

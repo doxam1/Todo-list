@@ -11,6 +11,10 @@ export { render };
 
 render();
 
+// i want default project to be selected on the dropdown menu of project names.
+document.getElementById('DefaultProjectOption').selected = true;
+
+
 
 // console.log(Todo.allTodosNotes)
 // the render will need to change so i can loop thru the todo array and render it again on every change.
@@ -49,7 +53,7 @@ window.onload = () =>{
     const ProjectTodoNotes = document.querySelector('.ProjectTodoNotes');
     ProjectTodoNotes.innerHTML = '';
     Todo.allTodosNoteLocalStorage(JSON.parse(localStorage.getItem('AllTodoNotes')));
-    console.log(Todo.allTodosNotes)
+    // console.log(Todo.allTodosNotes)
     Todo.allTodosNotes.forEach((todo, index) => {        
         AddToProject(Todo.allTodosNotes[index]);
     })    
