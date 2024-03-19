@@ -1,5 +1,6 @@
 export { removeNoteFromProject };
 import Todo from "./todoObj";
+import { onloadRendering } from ".";
 
 function removeNoteFromProject (note, title, description, project) {
     document.querySelector('.ProjectTodoNotes').removeChild(note);
@@ -8,6 +9,5 @@ function removeNoteFromProject (note, title, description, project) {
 
     Todo.allTodosNotes.splice(toBeDeletedIndex, 1);
     localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
-    console.log(Todo.allTodosNotes) ///////////////
-
+    // onloadRendering();
 }

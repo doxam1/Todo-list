@@ -4,6 +4,7 @@ const projectsNavBtns = document.querySelector('.projectsNavBtns');
 import {render} from './index'
 import Todo from './todoObj';
 import { removeNoteFromProject } from './removeNoteFromProject';
+import { onloadRendering } from './index';
 
 
 // might do a factory function - will check for a valid name with set function, and retrun the array.
@@ -43,18 +44,16 @@ function renderProjectsArray(){
             projectsNavBtns.removeChild(projectNavBtn);
             projectsArray.splice(projectsArray.indexOf(project), 1);
             localStorage.setItem('projectsArray', JSON.stringify(projectsArray));
-            renderProjectsArray();
 
-            //// i want to delete all notes on project if i delete the project btn on nav bar.
+            const todoDivSameAsProject = document.querySelectorAll(`.todoDiv.${project}`);
+            todoDivSameAsProject.forEach(todo => {
+                removeNoteFromProject(todo);
+            })
 
-            // const todoDiv = document.querySelectorAll('.todoDiv');
-            // todoDiv.forEach(todo => {
-            //     console.log(todo.classList.contains(project));
-            //     if (todo.classList.contains(project)){
-            //         document.querySelector('.ProjectTodoNotes').removeChild(todo);
-            //     }
-            // })
             renderProjectsArray();
+            render();
+            onloadRendering();
+            location.reload(); // why only this works? i want to reload the page with the new todo's after i delete a project nav btn with all the notes in it.
         }
 
         render();
