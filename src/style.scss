@@ -32,20 +32,23 @@ body {
         grid-area: 1 / 2 / -1 / -1;
 
         & .allProjectsHeader {
-            // border-bottom: 1px ridge black;
-        }
+            // border: 1px solid black;
 
-        & button.projectBtn { //to add an active pseudo class of active. -- will need some jS.
-            background-color: $white;/// to be changed on each click, like a library.
-            border: none;
-            border-bottom: 1px ridge black;
-            cursor: pointer;
-            height: 40px;
-            width: 120px;
-            border-radius: 12px 12px 0px 0px;
+            & .projectsNavBtns {
+                display: flex;
+                justify-content: flex-start;
+                align-items:center;
+                // gap: 1rem;
 
-            &:not(:focus) {
-                background-color: $grayNotActive;
+                & button.projectBtn {
+                    border: none;
+                    cursor: pointer;
+                    height: 40px;
+                    width: 120px;
+                    border-radius: 12px 12px 0px 0px;
+        
+                }
+
             }
         }
 

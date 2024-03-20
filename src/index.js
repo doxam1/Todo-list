@@ -5,6 +5,7 @@ import "./addNewProjectOption"
 import defaultProject from './addToProject';
 import './newProjectHandler';
 import AddToProject from './addToProject';
+import projectNavBtnColor from './projectNavbtnsStyleOnClick';
 
 
 export { onloadRendering };
@@ -22,6 +23,7 @@ document.getElementById('DefaultProjectOption').selected = true;
 // the render will need to change so i can loop thru the todo array and render it again on every change.
 
 function render() {
+    projectNavBtnColor();
     let projectHeaderBtnLibrary = document.querySelectorAll('.projectBtn');
     projectHeaderBtnLibrary.forEach((projectBtn)=>{
     projectBtn.onclick = () => {
@@ -55,7 +57,7 @@ function onloadRendering() {
     const ProjectTodoNotes = document.querySelector('.ProjectTodoNotes');
     ProjectTodoNotes.innerHTML = '';
     Todo.allTodosNoteLocalStorage(JSON.parse(localStorage.getItem('AllTodoNotes')));
-    console.log(Todo.allTodosNotes)
+    // console.log(Todo.allTodosNotes)
     Todo.allTodosNotes.forEach((todo, index) => {        
         AddToProject(Todo.allTodosNotes[index]);
     })
