@@ -53,14 +53,19 @@ body {
         }
 
         & .ProjectTodoNotes {
-            background-color: $white;
             height: 100%;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1rem;
             padding: 1rem;
 
+            & .nothingToDoH1 {
+                opacity: .3;
+             
+            }
+
             & .todoDiv {
+                // background: no-repeat url('./img/pending.svg') center;
                 // box-shadow: 1px 1px 4px black;
                 padding: 1rem;
                 position: relative;

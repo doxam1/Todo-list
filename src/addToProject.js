@@ -1,6 +1,9 @@
 import { removeNoteFromProject } from "./removeNoteFromProject";
 
 export default function AddToProject(NewTodo) {
+    if (document.querySelector('.ProjectTodoNotes').innerHTML == '<h1 class="nothingToDoH1"> nothing To Do... </h1>') {
+        document.querySelector('.ProjectTodoNotes').innerHTML = '';
+    }
     const newTodoDiv = document.createElement('div');   
     newTodoDiv.classList.add('todoDiv', `${NewTodo.project}`);
 
@@ -39,12 +42,18 @@ export default function AddToProject(NewTodo) {
         //default:
         //    break;
     }
+    newTodoDiv.style.boxShadow = `1px 1px 4px 1px ${divBorderColorFromPriority}`;
 
     delNoteBtn.onclick = () => {
         removeNoteFromProject(newTodoDiv, title.textContent, description.textContent, NewTodo.project);
     }
-    newTodoDiv.style.boxShadow = `1px 1px 4px 1px ${divBorderColorFromPriority}`;
     document.querySelector('.ProjectTodoNotes').appendChild(newTodoDiv);
+
+    (function () {
+        const ProjectTodoNotes = document.querySelector('.ProjectTodoNotes');        
+        ProjectTodoNotes.style.background = 'white';
+    })();
+
     // to change to using the object instead
 }
 

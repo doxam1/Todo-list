@@ -11,9 +11,8 @@ import projectNavBtnColor from './projectNavbtnsStyleOnClick';
 export { onloadRendering };
 export { render };
 
-render();
 onloadRendering();
-
+render();
 // i want default project to be selected on the dropdown menu of project names.
 document.getElementById('DefaultProjectOption').selected = true;
 
@@ -23,7 +22,7 @@ document.getElementById('DefaultProjectOption').selected = true;
 // the render will need to change so i can loop thru the todo array and render it again on every change.
 
 function render() {
-    projectNavBtnColor();
+    projectNavBtnColor()
     let projectHeaderBtnLibrary = document.querySelectorAll('.projectBtn');
     projectHeaderBtnLibrary.forEach((projectBtn)=>{
     projectBtn.onclick = () => {
@@ -58,6 +57,15 @@ function onloadRendering() {
     ProjectTodoNotes.innerHTML = '';
     Todo.allTodosNoteLocalStorage(JSON.parse(localStorage.getItem('AllTodoNotes')));
     // console.log(Todo.allTodosNotes)
+    if (Todo.allTodosNotes.length == 0) {
+        ProjectTodoNotes.style.background = "no-repeat url('./img/pending.svg') center";
+        ProjectTodoNotes.innerHTML = '<h1 class="nothingToDoH1"> nothing To Do... </h1>'
+
+
+    } else {
+        ProjectTodoNotes.style.background = 'white';
+        ProjectTodoNotes.innerHTML = '';
+    }
     Todo.allTodosNotes.forEach((todo, index) => {        
         AddToProject(Todo.allTodosNotes[index]);
     })
