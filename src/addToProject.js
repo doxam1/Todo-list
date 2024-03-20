@@ -1,4 +1,5 @@
 import { removeNoteFromProject } from "./removeNoteFromProject";
+import editNote from "./editNote";
 
 export default function AddToProject(NewTodo) {
     if (document.querySelector('.ProjectTodoNotes').innerHTML == '<h1 class="nothingToDoH1"> nothing To Do... </h1>') {
@@ -14,7 +15,7 @@ export default function AddToProject(NewTodo) {
     description.textContent = NewTodo.description;
 
     const dueDate = document.createElement('div');
-    dueDate.textContent = 'Due Date: ' + NewTodo.dueDate.split('T');
+    dueDate.textContent = 'Due Date: ' + NewTodo.dueDate;
 
     const priority = document.createElement('div');
     priority.textContent = 'Priority: ' + NewTodo.priority;
@@ -24,9 +25,13 @@ export default function AddToProject(NewTodo) {
 
     const delNoteBtn = document.createElement('button');
     delNoteBtn.classList.add('delNoteBtn');
-    delNoteBtn.textContent = 'X'
+    delNoteBtn.textContent = 'Delete Note'
 
-    newTodoDiv.append(delNoteBtn, title, description, dueDate, priority, projectNameDiv);
+    const editNoteBtn = document.createElement('button');
+    editNoteBtn.classList.add('editNoteBtn');
+    editNoteBtn.textContent = 'Edit Todo';
+
+    newTodoDiv.append(editNoteBtn, delNoteBtn, title, description, dueDate, priority, projectNameDiv);
 
     let divBorderColorFromPriority = '';
     switch (NewTodo.priority) {
@@ -46,6 +51,10 @@ export default function AddToProject(NewTodo) {
 
     delNoteBtn.onclick = () => {
         removeNoteFromProject(newTodoDiv, title.textContent, description.textContent, NewTodo.project);
+    }
+
+    editNoteBtn.onclick = () => {
+        editNote(title.textContent, description.textContent, NewTodo.dueDate, NewTodo.priority, NewTodo.project, newTodoDiv);
     }
     document.querySelector('.ProjectTodoNotes').appendChild(newTodoDiv);
 

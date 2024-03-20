@@ -27,7 +27,7 @@
                 </div>
                 <div class="input">
                     <label for="date"> due date: </label>
-                    <input type="datetime-local" id="date" required>
+                    <input type="date" id="date" required>
                 </div>
                 <div class="input">
                     <legend> how important is it? </legend>
@@ -61,6 +61,39 @@
                 <button class="projectBtn allTodoNotesFromAllProjects"> All Notes </button>
                 <button class="projectBtn Default"> Default project </button>                
             </nav>
+        </div>
+        <div class="editNoteModal">
+            <dialog class="editDialog">
+                <form id="editTodoNote">
+                    <fieldset>
+                        <legend> <h2> Edit Note </h2></legend>
+                        <div class="input">
+                            <label for="editTitle"> Title </label>
+                            <input type="text" id="editTitle" required>
+                        </div>
+                        <div class="input">
+                            <label for="editDescription"> Enter assignment description: </label>
+                            <textarea  id="editDescription" name="description" rows="8" cols="28"></textarea>
+                        </div>
+                        <div class="input">
+                            <label for="editDate"> due date: </label>
+                            <input type="date" id="editDate" required>
+                        </div>
+                        <div class="input">
+                            <legend> how important is it? </legend>
+                            <label for="editSuper"> Super </label>
+                            <input type="radio" name="priority" id="editSuper" value="Super important" />
+                            <label for="editNormal"> Normal </label>
+                            <input type="radio" name="priority" id="editNormal" value="Normal" checked />
+                            <label for="EditNoHurry"> No hurry </label>
+                            <input type="radio" name="priority" id="EditNoHurry" value="No hurry" />
+                        </div>
+                        <button type="submit" class="editProjectBtn"> Ok </button>
+                        <div class="errorMsg"></div>
+                    </fieldset>            
+                </form>
+
+            </dialog>
         </div>
         <div class="ProjectTodoNotes">
             <!-- <div class="todoDiv Default" style="box-shadow: black 1px 1px 4px 1px; display: block;"><button class="delNoteBtn">X</button><h1>one</h1><p>two</p><div>Due Date: </div><div>Priority: Normal</div><div>Project Name: Default</div></div> -->

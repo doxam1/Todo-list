@@ -2,7 +2,7 @@ import './style.css';
 import Todo from './todoObj';
 import "./minDateToday";
 import "./addNewProjectOption"
-import defaultProject from './addToProject';
+// import defaultProject from './addToProject';
 import './newProjectHandler';
 import AddToProject from './addToProject';
 import projectNavBtnColor from './projectNavbtnsStyleOnClick';
