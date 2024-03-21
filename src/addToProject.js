@@ -9,9 +9,11 @@ export default function AddToProject(NewTodo) {
     newTodoDiv.classList.add('todoDiv', `${NewTodo.project}`);
 
     const title = document.createElement('h1');
+    title.classList.add('noteTitle');
     title.textContent = NewTodo.title;
 
     const description = document.createElement('p');
+    description.classList.add('noteDescription')
     description.textContent = NewTodo.description;
 
     const dueDate = document.createElement('div');
@@ -21,6 +23,7 @@ export default function AddToProject(NewTodo) {
     priority.textContent = 'Priority: ' + NewTodo.priority;
 
     const projectNameDiv = document.createElement('div');
+    projectNameDiv.classList.add('noteProjectName')
     projectNameDiv.textContent = 'Project Name: ' + NewTodo.project;
 
     const delNoteBtn = document.createElement('button');

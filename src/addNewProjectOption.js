@@ -47,13 +47,16 @@ function renderProjectsArray(){
 
             const todoDivSameAsProject = document.querySelectorAll(`.todoDiv.${project}`);
             todoDivSameAsProject.forEach(todo => {
-                removeNoteFromProject(todo);
+                const title = todo.querySelector('.noteTitle').innerHTML;
+                const description = todo.querySelector('.noteDescription').innerHTML;
+                const project = todo.querySelector('.noteProjectName').innerHTML.slice(14);
+                removeNoteFromProject(todo, title, description, project);
             })
 
             renderProjectsArray();
             render();
             onloadRendering();
-            location.reload(); // why only this works? i want to reload the page with the new todo's after i delete a project nav btn with all the notes in it.
+            // location.reload(); // why only this works? i want to reload the page with the new todo's after i delete a project nav btn with all the notes in it.
         }
 
         render();
