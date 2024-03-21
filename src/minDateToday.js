@@ -11,5 +11,6 @@ if (mm < 10) {
    mm = '0' + mm;
 } 
     
-today = yyyy + '-' + mm + '-' + dd + 'T00:00:00';
+today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("date").setAttribute("min", today);
+document.getElementById("editDate").setAttribute("min", today);
