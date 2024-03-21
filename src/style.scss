@@ -48,7 +48,18 @@ body {
                     border-radius: 12px 12px 0px 0px;
         
                 }
+            }
+        }
 
+        & .editNoteModal {
+
+            & .editDialog {
+
+                & #editTodoNoteForm > * > div:not(.input:has([type='radio'])){
+                
+                    display: flex;
+                    flex-direction: column;
+                }
             }
         }
 
@@ -76,9 +87,6 @@ body {
                     right: 5%;
                 }
             }
-
         }
-
-        
     }
 }

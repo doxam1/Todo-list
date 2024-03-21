@@ -21,12 +21,18 @@ export default function editNote(title, description, dueDate, priority, project,
     })
     
     
+    const cancelEditBtn = document.querySelector('.cancelEditBtn');
+    cancelEditBtn.onclick = (e) => {
+        e.preventDefault();
+        document.querySelector('.editDialog').close();
+    }
+    
     const editProjectBtn = document.querySelector('.editProjectBtn');
     editProjectBtn.onclick = (e) => {
         e.preventDefault();
         removeNoteFromProject(newTodoDiv, title, description, project);
 
-        const editPriorityChecked = document.querySelector('#editTodoNote input[type="radio"]:checked').value;
+        const editPriorityChecked = document.querySelector('#editTodoNoteForm input[type="radio"]:checked').value;
 
         new Todo(editTitle.value, editDescription.value, editDate.value, editPriorityChecked, project).pushToTodoNotes();
         localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
