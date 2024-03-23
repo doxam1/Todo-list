@@ -70,5 +70,3 @@ function onloadRendering() {
         AddToProject(Todo.allTodosNotes[index]);
     })
 }
-
-

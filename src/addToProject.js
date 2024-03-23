@@ -1,7 +1,9 @@
 import { removeNoteFromProject } from "./removeNoteFromProject";
 import editNote from "./editNote";
+import Todo from "./todoObj";
 
 export default function AddToProject(NewTodo) {
+
     if (document.querySelector('.ProjectTodoNotes').innerHTML == '<h1 class="nothingToDoH1"> nothing To Do... </h1>') {
         document.querySelector('.ProjectTodoNotes').innerHTML = '';
     }
@@ -27,14 +29,63 @@ export default function AddToProject(NewTodo) {
     projectNameDiv.textContent = 'Project Name: ' + NewTodo.project;
 
     const delNoteBtn = document.createElement('button');
-    delNoteBtn.classList.add('delNoteBtn');
+    delNoteBtn.className = 'delNoteBtn btn btn-primary';
     delNoteBtn.textContent = 'Delete Note'
 
     const editNoteBtn = document.createElement('button');
-    editNoteBtn.classList.add('editNoteBtn');
-    editNoteBtn.textContent = 'Edit Todo';
+    editNoteBtn.className = 'editNoteBtn btn btn-primary';
+    editNoteBtn.textContent = 'Edit Note';
 
-    newTodoDiv.append(editNoteBtn, delNoteBtn, title, description, dueDate, priority, projectNameDiv);
+    const addCheckboxbtn = document.createElement('button');
+    addCheckboxbtn.className = 'addCheckboxbtn btn btn-primary'
+    addCheckboxbtn.textContent = 'add CheckBox'
+
+    newTodoDiv.append(editNoteBtn, delNoteBtn, title, description ,dueDate, priority, projectNameDiv, addCheckboxbtn);
+
+    if (NewTodo.checkBoxInputValue.length > 0) {
+        NewTodo.checkBoxInputValue.forEach(checkBox => {
+        
+        const checkBoxDiv = document.createElement('div');
+
+        const checkBoxInput = document.createElement('input');
+        checkBoxInput.setAttribute('type', 'checkbox');
+
+        const checkBoxInputText = document.createElement('input');
+        checkBoxInputText.value = checkBox;
+        checkBoxInputText.setAttribute('type', 'text');
+
+        const delCheckBox = document.createElement('button');
+        delCheckBox.textContent = 'x'
+
+        checkBoxDiv.append(checkBoxInput, checkBoxInputText, delCheckBox);
+
+        newTodoDiv.insertBefore(checkBoxDiv, addCheckboxbtn);
+
+        delCheckBox.onclick = (e) => {
+            // delete from object:
+            NewTodo.checkBoxInputValue.splice(NewTodo.checkBoxInputValue.indexOf(e.target.previousSibling.value), 1);
+            Todo.deleteFromTodoNotes(NewTodo);
+            localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
+
+            //delete from DOM:
+            e.target.parentNode.remove();
+
+        }
+
+        checkBoxInputText.onchange = () => {
+            Todo.deleteFromTodoNotes(NewTodo);
+            NewTodo.checkBoxInputValue.push(checkBoxInputText.value);
+            new Todo (NewTodo)
+            localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
+            console.log(Todo.allTodosNotes)
+        }
+
+        checkBoxInput.addEventListener('change', () => {
+            checkBoxInput.checked ? checkBoxInputText.setAttribute('disabled', 'true') : checkBoxInputText.removeAttribute('disabled', 'true') ;                
+            });
+    })                  
+        };
+    
 
     let divBorderColorFromPriority = '';
     switch (NewTodo.priority) {
@@ -58,6 +109,49 @@ export default function AddToProject(NewTodo) {
 
     editNoteBtn.onclick = () => {
         editNote(title.textContent, description.textContent, NewTodo.dueDate, NewTodo.priority, NewTodo.project, newTodoDiv);
+    }
+
+    addCheckboxbtn.onclick = () => {
+        const checkBoxDiv = document.createElement('div');
+
+        const checkBoxInput = document.createElement('input');
+        checkBoxInput.setAttribute('type', 'checkbox');
+
+        const checkBoxInputText = document.createElement('input');
+        checkBoxInputText.setAttribute('type', 'text');
+
+        const delCheckBox = document.createElement('button');
+        delCheckBox.textContent = 'x'
+
+        checkBoxDiv.append(checkBoxInput, checkBoxInputText, delCheckBox);
+
+        newTodoDiv.insertBefore(checkBoxDiv, addCheckboxbtn);
+
+        checkBoxInputText.onchange = () => {
+            Todo.deleteFromTodoNotes(NewTodo);
+            NewTodo.checkBoxInputValue.push(checkBoxInputText.value); /// i need to change only the input value that being changed, right now the value ispushed as new value to the list.
+            new Todo (NewTodo)
+            localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
+            console.log(Todo.allTodosNotes)
+        }
+        delCheckBox.onclick = (e) => {
+            // delete from object:
+            NewTodo.checkBoxInputValue.splice(NewTodo.checkBoxInputValue.indexOf(e.target.previousSibling.value), 1);
+            Todo.deleteFromTodoNotes(NewTodo);
+            localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
+
+            //delete from DOM:
+            e.target.parentNode.remove();
+
+        }
+
+        
+        checkBoxInput.addEventListener('change', () => {
+            checkBoxInput.checked ? checkBoxInputText.setAttribute('disabled', 'true') : checkBoxInputText.removeAttribute('disabled', 'true') ;                
+            });
+
+        // add saving for the checkbox added to notes.
+
     }
     document.querySelector('.ProjectTodoNotes').appendChild(newTodoDiv);
 

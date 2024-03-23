@@ -36,27 +36,37 @@ function renderProjectsArray(){
         projectNavBtn.classList.add('projectBtn', `${project}`);
 
         const delBtnForProject = document.createElement('button');
-        delBtnForProject.textContent = 'X';
+        delBtnForProject.classList.add('delBtnForProject')
+        delBtnForProject.textContent = 'x';
         projectNavBtn.appendChild(delBtnForProject);
 
         projectsNavBtns.appendChild(projectNavBtn);
         delBtnForProject.onclick =()=>{
-            projectsNavBtns.removeChild(projectNavBtn);
+            document.querySelector('.confirmDeleteProject').showModal();
+            document.querySelector('.confirmDeletebtn').onclick = (e) => {
+                e.preventDefault();
+                projectsNavBtns.removeChild(projectNavBtn);
             projectsArray.splice(projectsArray.indexOf(project), 1);
             localStorage.setItem('projectsArray', JSON.stringify(projectsArray));
-
             const todoDivSameAsProject = document.querySelectorAll(`.todoDiv.${project}`);
             todoDivSameAsProject.forEach(todo => {
                 const title = todo.querySelector('.noteTitle').innerHTML;
                 const description = todo.querySelector('.noteDescription').innerHTML;
                 const project = todo.querySelector('.noteProjectName').innerHTML.slice(14);
                 removeNoteFromProject(todo, title, description, project);
+                document.querySelector('.confirmDeleteProject').close();
             })
-
             renderProjectsArray();
             render();
             onloadRendering();
             // location.reload(); // why only this works? i want to reload the page with the new todo's after i delete a project nav btn with all the notes in it.
+            }
+            document.querySelector('.cancelDeleteProject').onclick =()=> document.querySelector('.confirmDeleteProject').close();
+
+
+
+            
+            
         }
 
         render();
