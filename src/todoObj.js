@@ -5,7 +5,7 @@ export default class Todo {
         this.dueDate = dueDate,
         this.priority = priority,
         this.project = project
-        this.checkBoxInputValue = [{}];
+        this.checkBoxInputValue = [];
     }
     static allTodosNotes = new Array();
 

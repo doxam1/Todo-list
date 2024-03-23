@@ -44,14 +44,15 @@ export default function AddToProject(NewTodo) {
 
     if (NewTodo.checkBoxInputValue.length > 0) {
         NewTodo.checkBoxInputValue.forEach(checkBox => {
-        
+
         const checkBoxDiv = document.createElement('div');
 
         const checkBoxInput = document.createElement('input');
         checkBoxInput.setAttribute('type', 'checkbox');
 
         const checkBoxInputText = document.createElement('input');
-        checkBoxInputText.value = checkBox;
+        checkBoxInputText.value = checkBox.split(',')[0];
+        let checkBoxInputTextOld = checkBoxInputText.value;
         checkBoxInputText.setAttribute('type', 'text');
 
         const delCheckBox = document.createElement('button');
@@ -69,22 +70,22 @@ export default function AddToProject(NewTodo) {
 
             //delete from DOM:
             e.target.parentNode.remove();
-
         }
 
-        checkBoxInputText.onchange = () => {
+        checkBoxInputText.onchange = (e) => {
             Todo.deleteFromTodoNotes(NewTodo);
-            NewTodo.checkBoxInputValue.push(checkBoxInputText.value);
+            NewTodo.checkBoxInputValue[NewTodo.checkBoxInputValue.indexOf(checkBoxInputTextOld)] = e.target.value;
+            checkBoxInputTextOld = e.target.value;
             new Todo (NewTodo)
             localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
-            console.log(Todo.allTodosNotes)
         }
 
         checkBoxInput.addEventListener('change', () => {
+            
             checkBoxInput.checked ? checkBoxInputText.setAttribute('disabled', 'true') : checkBoxInputText.removeAttribute('disabled', 'true') ;                
             });
     })                  
-        };
+ };
     
 
     let divBorderColorFromPriority = '';
@@ -127,12 +128,25 @@ export default function AddToProject(NewTodo) {
 
         newTodoDiv.insertBefore(checkBoxDiv, addCheckboxbtn);
 
-        checkBoxInputText.onchange = () => {
+        checkBoxInputText.onchange = (e) => {
+            // from blank value to first letter:
+            let checkBoxInputTextOld = e.target.value;
             Todo.deleteFromTodoNotes(NewTodo);
-            NewTodo.checkBoxInputValue.push(checkBoxInputText.value); /// i need to change only the input value that being changed, right now the value ispushed as new value to the list.
+            NewTodo.checkBoxInputValue.push(e.target.value);
+            checkBoxInputTextOld = e.target.value;
             new Todo (NewTodo)
             localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
-            console.log(Todo.allTodosNotes)
+
+            // after first letter change:
+            e.target.onchange = (e) => {
+            Todo.deleteFromTodoNotes(NewTodo);
+            NewTodo.checkBoxInputValue[NewTodo.checkBoxInputValue.indexOf(checkBoxInputTextOld)] = e.target.value;
+            checkBoxInputTextOld = e.target.value;
+            new Todo (NewTodo)
+            localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));                                                
+            }
+            
+            
         }
         delCheckBox.onclick = (e) => {
             // delete from object:
