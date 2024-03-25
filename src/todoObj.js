@@ -1,13 +1,14 @@
 export default class Todo {
-    constructor (title, description, dueDate, priority, project, checkBoxInputValue) {
+    constructor (title, description, dueDate, priority, project, checkBoxInputValue, checkBoxCheckedArray) {
         this.title = title,
         this.description = description,
         this.dueDate = dueDate,
         this.priority = priority,
-        this.project = project
-        this.checkBoxInputValue = [];
+        this.project = project,
+        this.checkBoxInputValue = [],
+        this.checkBoxCheckedArray = [];
     }
-    static allTodosNotes = new Array();
+    static allTodosNotes = [];
 
     static allTodosNoteLocalStorage(fromLocalStorage) {
         if (fromLocalStorage) {
@@ -18,12 +19,14 @@ export default class Todo {
     }
 
 
+
+
     // get allTodosNotes() {
     //     return this.allTodosNotes;
     // }
     
     pushToTodoNotes() {        
-        Todo.allTodosNotes.push({title:this.title, description:this.description, dueDate:this.dueDate, priority:this.priority, project:this.project, checkBoxInputValue:this.checkBoxInputValue});
+        Todo.allTodosNotes.push({title:this.title, description:this.description, dueDate:this.dueDate, priority:this.priority, project:this.project, checkBoxInputValue:this.checkBoxInputValue, checkBoxCheckedArray:this.checkBoxCheckedArray});
     }
 
     static deleteFromTodoNotes() {

@@ -38,29 +38,41 @@ export default function AddToProject(NewTodo) {
 
     const addCheckboxbtn = document.createElement('button');
     addCheckboxbtn.className = 'addCheckboxbtn btn btn-primary'
-    addCheckboxbtn.textContent = 'add CheckBox'
+    addCheckboxbtn.textContent = 'add CheckBox';
 
-    newTodoDiv.append(editNoteBtn, delNoteBtn, title, description ,dueDate, priority, projectNameDiv, addCheckboxbtn);
+    const checkBoxDivBox = document.createElement('div');
+    checkBoxDivBox.classList.add('checkBoxDivBox');
+
+    newTodoDiv.append(editNoteBtn, delNoteBtn, title, description ,dueDate, priority, projectNameDiv, checkBoxDivBox, addCheckboxbtn);
 
     if (NewTodo.checkBoxInputValue.length > 0) {
-        NewTodo.checkBoxInputValue.forEach(checkBox => {
-
+        NewTodo.checkBoxInputValue.forEach(function (checkBox, i){
         const checkBoxDiv = document.createElement('div');
 
         const checkBoxInput = document.createElement('input');
         checkBoxInput.setAttribute('type', 'checkbox');
 
         const checkBoxInputText = document.createElement('input');
-        checkBoxInputText.value = checkBox.split(',')[0];
+        checkBoxInputText.value = checkBox;
         let checkBoxInputTextOld = checkBoxInputText.value;
         checkBoxInputText.setAttribute('type', 'text');
 
+        Todo.allCheckBoxes = JSON.parse(localStorage.getItem("allCheckBoxes")) // move it to onstartREndering on index.js
+
+
+        /////////////////////////////////////////
+        if (NewTodo.checkBoxCheckedArray[i] == 'checked') {
+            checkBoxInput.click();
+            checkBoxInput.classList.add('checked');
+            checkBoxInputText.setAttribute('disabled', 'true');            
+        }
+        
         const delCheckBox = document.createElement('button');
         delCheckBox.textContent = 'x'
 
         checkBoxDiv.append(checkBoxInput, checkBoxInputText, delCheckBox);
 
-        newTodoDiv.insertBefore(checkBoxDiv, addCheckboxbtn);
+        checkBoxDivBox.appendChild(checkBoxDiv);
 
         delCheckBox.onclick = (e) => {
             // delete from object:
@@ -72,7 +84,7 @@ export default function AddToProject(NewTodo) {
             e.target.parentNode.remove();
         }
 
-        checkBoxInputText.onchange = (e) => {
+        checkBoxInputText.onkeyup = (e) => {
             Todo.deleteFromTodoNotes(NewTodo);
             NewTodo.checkBoxInputValue[NewTodo.checkBoxInputValue.indexOf(checkBoxInputTextOld)] = e.target.value;
             checkBoxInputTextOld = e.target.value;
@@ -80,12 +92,26 @@ export default function AddToProject(NewTodo) {
             localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
         }
 
-        checkBoxInput.addEventListener('change', () => {
-            
-            checkBoxInput.checked ? checkBoxInputText.setAttribute('disabled', 'true') : checkBoxInputText.removeAttribute('disabled', 'true') ;                
-            });
-    })                  
- };
+        checkBoxInput.addEventListener('change', (e) => {
+            if (checkBoxInput.classList.contains('checked')) {
+                checkBoxInput.classList.remove('checked');
+                checkBoxInputText.removeAttribute('disabled', 'true');
+                Todo.deleteFromTodoNotes(NewTodo);
+                NewTodo.checkBoxCheckedArray[Array.from(e.target.parentElement.parentElement.children).indexOf(e.target.parentNode)] =  e.target.classList.value;
+                new Todo (NewTodo);
+                localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));         
+
+            } else {
+                checkBoxInput.classList.add('checked');
+                checkBoxInput.nextSibling.setAttribute('disabled', 'true');
+                Todo.deleteFromTodoNotes(NewTodo);
+                NewTodo.checkBoxCheckedArray[Array.from(e.target.parentElement.parentElement.children).indexOf(e.target.parentNode)] =  e.target.classList.value;
+                new Todo (NewTodo);
+                localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
+            }
+        })
+                
+    })};
     
 
     let divBorderColorFromPriority = '';
@@ -126,9 +152,11 @@ export default function AddToProject(NewTodo) {
 
         checkBoxDiv.append(checkBoxInput, checkBoxInputText, delCheckBox);
 
-        newTodoDiv.insertBefore(checkBoxDiv, addCheckboxbtn);
+        checkBoxDivBox.appendChild(checkBoxDiv);
 
-        checkBoxInputText.onchange = (e) => {
+        // newTodoDiv.insertBefore(checkBoxDivBox, addCheckboxbtn);
+
+        checkBoxInputText.onkeyup = (e) => {
             // from blank value to first letter:
             let checkBoxInputTextOld = e.target.value;
             Todo.deleteFromTodoNotes(NewTodo);
@@ -138,7 +166,7 @@ export default function AddToProject(NewTodo) {
             localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
 
             // after first letter change:
-            e.target.onchange = (e) => {
+            e.target.onkeyup = (e) => {
             Todo.deleteFromTodoNotes(NewTodo);
             NewTodo.checkBoxInputValue[NewTodo.checkBoxInputValue.indexOf(checkBoxInputTextOld)] = e.target.value;
             checkBoxInputTextOld = e.target.value;
@@ -160,12 +188,54 @@ export default function AddToProject(NewTodo) {
         }
 
         
-        checkBoxInput.addEventListener('change', () => {
-            checkBoxInput.checked ? checkBoxInputText.setAttribute('disabled', 'true') : checkBoxInputText.removeAttribute('disabled', 'true') ;                
-            });
+        checkBoxInput.addEventListener('change', (e) => {
+            if (checkBoxInput.classList.contains('checked')) {
+                checkBoxInput.classList.remove('checked');
+                checkBoxInputText.removeAttribute('disabled', 'true');
+                Todo.deleteFromTodoNotes(NewTodo);
+                console.log(NewTodo)
+                // console.log(Array.from(e.target.parentElement.parentElement.children).indexOf(e.target.parentNode))
+                NewTodo.checkBoxCheckedArray[Array.from(e.target.parentElement.parentElement.children).indexOf(e.target.parentNode)] =  e.target.classList.value;
+                new Todo (NewTodo);
+                localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
+                // console.log(Todo.allTodosNotes)
 
-        // add saving for the checkbox added to notes.
 
+            //     let checkBoxInputTextOld = e.target.value;
+            // Todo.deleteFromTodoNotes(NewTodo);
+            // NewTodo.checkBoxInputValue.push(e.target.value);
+            // checkBoxInputTextOld = e.target.value;
+            // new Todo (NewTodo)
+            // localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
+
+
+                //// need to find the index of the e.target on the note.
+                // NewTodo.checkBoxCheckedArray[NewTodo.checkBoxCheckedArray.indexOf(index(e.target))] = checkBoxInput.classList;
+
+                // console.log(NewTodo.checkBoxCheckedArray)
+
+                
+
+            } else {
+                checkBoxInput.classList.add('checked');
+                checkBoxInput.nextSibling.setAttribute('disabled', 'true');
+                Todo.deleteFromTodoNotes(NewTodo);
+                console.log(NewTodo)
+                // console.log(Array.from(e.target.parentElement.parentElement.children).indexOf(e.target.parentNode))
+                NewTodo.checkBoxCheckedArray[Array.from(e.target.parentElement.parentElement.children).indexOf(e.target.parentNode)] =  e.target.classList.value;
+                new Todo (NewTodo);
+                localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
+                // console.log(Todo.allTodosNotes)
+            }
+            // const allCheckBoxesNodeList = document.querySelectorAll('input[type="checkbox"]');
+
+            // allCheckBoxesNodeList.forEach(function (checkBox, i){
+            //    Todo.allCheckBoxes[i] = checkBox.classList.value;
+            // })
+            
+            // localStorage.setItem('allCheckBoxes', JSON.stringify(Todo.allCheckBoxes));
+
+        })
     }
     document.querySelector('.ProjectTodoNotes').appendChild(newTodoDiv);
 
