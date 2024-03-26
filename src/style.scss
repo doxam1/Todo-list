@@ -15,8 +15,14 @@ body {
     }
 
     & .menu {
+        position: relative;
         grid-area: 2 / 1 / -1 / 2;
         padding: 1rem;
+
+        & .errorMsg {
+            position: absolute;
+            top: 60px;
+        }
 
         & #newTodoNote {
 

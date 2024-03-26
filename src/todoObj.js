@@ -5,8 +5,8 @@ export default class Todo {
         this.dueDate = dueDate,
         this.priority = priority,
         this.project = project,
-        this.checkBoxInputValue = [],
-        this.checkBoxCheckedArray = [];
+        this.checkBoxInputValue = checkBoxInputValue,
+        this.checkBoxCheckedArray = checkBoxCheckedArray;
     }
     static allTodosNotes = [];
 
@@ -27,6 +27,10 @@ export default class Todo {
     
     pushToTodoNotes() {        
         Todo.allTodosNotes.push({title:this.title, description:this.description, dueDate:this.dueDate, priority:this.priority, project:this.project, checkBoxInputValue:this.checkBoxInputValue, checkBoxCheckedArray:this.checkBoxCheckedArray});
+    }
+
+    editNoteOnTodoNote(i) {
+        Todo.allTodosNotes[i] = {title:this.title, description:this.description, dueDate:this.dueDate, priority:this.priority, project:this.project, checkBoxInputValue:this.checkBoxInputValue, checkBoxCheckedArray:this.checkBoxCheckedArray}
     }
 
     static deleteFromTodoNotes() {

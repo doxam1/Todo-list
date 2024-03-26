@@ -2,7 +2,7 @@ import { removeNoteFromProject } from './removeNoteFromProject.js';
 import Todo from './todoObj';
 import { onloadRendering } from './index.js'
 
-export default function editNote(title, description, dueDate, priority, project, newTodoDiv) {
+export default function editNote(title, description, dueDate, priority, project, newTodoDiv, checkBoxInputValue, checkBoxCheckedArray, index) {
     document.querySelector('.editDialog').showModal();
 
     const editTitle = document.querySelector('#editTitle');
@@ -14,7 +14,7 @@ export default function editNote(title, description, dueDate, priority, project,
     const editDate = document.querySelector('#editDate');
     editDate.value = dueDate;
 
-    const editPriority = document.querySelectorAll('#editTodoNote input[type="radio"]');
+    const editPriority = document.querySelectorAll('#editTodoNoteForm input[type="radio"]');
     editPriority.forEach(option => {
         if (option.value == priority)
         option.checked = true;
@@ -30,11 +30,11 @@ export default function editNote(title, description, dueDate, priority, project,
     const editProjectBtn = document.querySelector('.editProjectBtn');
     editProjectBtn.onclick = (e) => {
         e.preventDefault();
-        removeNoteFromProject(newTodoDiv, title, description, project);
+        // removeNoteFromProject(newTodoDiv, title, description, project); // no need becuase i'm editing the index of Todo.allTodoNotes itself and then rendering.
 
         const editPriorityChecked = document.querySelector('#editTodoNoteForm input[type="radio"]:checked').value;
 
-        new Todo(editTitle.value, editDescription.value, editDate.value, editPriorityChecked, project).pushToTodoNotes();
+        new Todo(editTitle.value, editDescription.value, editDate.value, editPriorityChecked, project, checkBoxInputValue, checkBoxCheckedArray).editNoteOnTodoNote(index);
         localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
         onloadRendering();
 
@@ -43,37 +43,4 @@ export default function editNote(title, description, dueDate, priority, project,
         document.querySelector('.editDialog').close();
         
     }
-    
 }
-
-/* <dialog class="editDialog">
-                <form id="editTodoNote">
-                    <fieldset>
-                        <legend> <h2> Add New Note </h2></legend>
-                        <div class="input">
-                            <label for="editTitle"> Title </label>
-                            <input type="text" id="editTitle" required>
-                        </div>
-                        <div class="input">
-                            <label for="editDescription"> Enter assignment description: </label>
-                            <textarea  id="editDescription" name="description" rows="8" cols="28"></textarea>
-                        </div>
-                        <div class="input">
-                            <label for="editDate"> due date: </label>
-                            <input type="datetime-local" id="editDate" required>
-                        </div>
-                        <div class="input">
-                            <legend> how important is it? </legend>
-                            <label for="editSuper"> Super </label>
-                            <input type="radio" name="priority" id="editSuper" value="Super important" />
-                            <label for="editNormal"> Normal </label>
-                            <input type="radio" name="priority" id="editNormal" value="Normal" checked />
-                            <label for="EditNoHurry"> No hurry </label>
-                            <input type="radio" name="priority" id="EditNoHurry" value="No hurry" />
-                        </div>
-                        <button type="submit" class="editProjectBtn"> Ok </button>
-                        <div class="errorMsg"></div>
-                    </fieldset>            
-                </form>
-
-            </dialog> */

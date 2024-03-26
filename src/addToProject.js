@@ -135,7 +135,7 @@ export default function AddToProject(NewTodo) {
     }
 
     editNoteBtn.onclick = () => {
-        editNote(title.textContent, description.textContent, NewTodo.dueDate, NewTodo.priority, NewTodo.project, newTodoDiv);
+        editNote(title.textContent, description.textContent, NewTodo.dueDate, NewTodo.priority, NewTodo.project, newTodoDiv, NewTodo.checkBoxInputValue, NewTodo.checkBoxCheckedArray, Todo.allTodosNotes.indexOf(NewTodo));
     }
 
     addCheckboxbtn.onclick = () => {
@@ -198,43 +198,16 @@ export default function AddToProject(NewTodo) {
                 NewTodo.checkBoxCheckedArray[Array.from(e.target.parentElement.parentElement.children).indexOf(e.target.parentNode)] =  e.target.classList.value;
                 new Todo (NewTodo);
                 localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
-                // console.log(Todo.allTodosNotes)
-
-
-            //     let checkBoxInputTextOld = e.target.value;
-            // Todo.deleteFromTodoNotes(NewTodo);
-            // NewTodo.checkBoxInputValue.push(e.target.value);
-            // checkBoxInputTextOld = e.target.value;
-            // new Todo (NewTodo)
-            // localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
-
-
-                //// need to find the index of the e.target on the note.
-                // NewTodo.checkBoxCheckedArray[NewTodo.checkBoxCheckedArray.indexOf(index(e.target))] = checkBoxInput.classList;
-
-                // console.log(NewTodo.checkBoxCheckedArray)
-
                 
-
             } else {
                 checkBoxInput.classList.add('checked');
                 checkBoxInput.nextSibling.setAttribute('disabled', 'true');
                 Todo.deleteFromTodoNotes(NewTodo);
                 console.log(NewTodo)
-                // console.log(Array.from(e.target.parentElement.parentElement.children).indexOf(e.target.parentNode))
                 NewTodo.checkBoxCheckedArray[Array.from(e.target.parentElement.parentElement.children).indexOf(e.target.parentNode)] =  e.target.classList.value;
                 new Todo (NewTodo);
                 localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
-                // console.log(Todo.allTodosNotes)
             }
-            // const allCheckBoxesNodeList = document.querySelectorAll('input[type="checkbox"]');
-
-            // allCheckBoxesNodeList.forEach(function (checkBox, i){
-            //    Todo.allCheckBoxes[i] = checkBox.classList.value;
-            // })
-            
-            // localStorage.setItem('allCheckBoxes', JSON.stringify(Todo.allCheckBoxes));
-
         })
     }
     document.querySelector('.ProjectTodoNotes').appendChild(newTodoDiv);

@@ -21,7 +21,7 @@ addNewProjectBtn.addEventListener('click', (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     const newProjectImportance = document.querySelector('input[name="priority"]:checked').value; /// need to get it after user press and change priority - not on load.    
-    new Todo(NewProjectTitle.value, NewProjectDescription.value, NewProjectDueDate.value,newProjectImportance,NewProjectName.options[NewProjectName.selectedIndex].text).pushToTodoNotes();
+    new Todo(NewProjectTitle.value, NewProjectDescription.value, NewProjectDueDate.value,newProjectImportance,NewProjectName.options[NewProjectName.selectedIndex].text, [], []).pushToTodoNotes();
     localStorage.setItem('AllTodoNotes', JSON.stringify(Todo.allTodosNotes));
     AddToProject(Todo.allTodosNotes[Todo.allTodosNotes.length-1]);
     document.querySelector(`.${projectName.value}`).click(); // click is working.

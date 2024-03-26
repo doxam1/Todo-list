@@ -9,13 +9,13 @@ function validateForm() {
     errorMsg.style.color = 'red';
     errorMsg.style.textAlign = 'center';
     if (NewProjectTitle.value == '') {
-        errorMsg.textContent = 'please enter title';
+        errorMsg.textContent = '-- please enter title --';
         setTimeout(() => {
             errorMsg.textContent = '';            
         }, 1000);
         return false;
     } else if (NewProjectDescription.value == '') {
-        errorMsg.textContent = 'please enter description';
+        errorMsg.textContent = '-- please enter description --';
         setTimeout(() => {
             errorMsg.textContent = '';            
         }, 1000);
