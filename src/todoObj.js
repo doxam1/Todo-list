@@ -8,7 +8,7 @@ export default class Todo {
         this.checkBoxInputValue = checkBoxInputValue,
         this.checkBoxCheckedArray = checkBoxCheckedArray;
     }
-    static allTodosNotes = [];
+    // static allTodosNotes = [];
 
     static allTodosNoteLocalStorage(fromLocalStorage) {
         if (fromLocalStorage) {
