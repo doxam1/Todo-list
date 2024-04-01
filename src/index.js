@@ -53,19 +53,15 @@ function render() {
   });
 }
 
-// this function is for rendering a saved version of the object of todo's. need to learn about local storage + saving the library functions.
-
-// const renderBtn = document.querySelector('.allTodoNotesFromAllProjects');
 function onloadRendering() {
   const ProjectTodoNotes = document.querySelector(".ProjectTodoNotes");
   ProjectTodoNotes.innerHTML = "";
   Todo.allTodosNoteLocalStorage(
     JSON.parse(localStorage.getItem("AllTodoNotes"))
   );
-  // console.log(Todo.allTodosNotes)
   if (Todo.allTodosNotes.length === 0) {
     ProjectTodoNotes.style.background =
-      "no-repeat url('./img/pending.svg') center";
+      "no-repeat url('./img/pending.svg') center fixed";
     ProjectTodoNotes.innerHTML =
       '<h1 class="nothingToDoH1"> nothing To Do... </h1>';
   } else {
