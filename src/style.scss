@@ -1,108 +1,125 @@
 body {
-    font-size: 14px;
-    margin: 0;
-    display: grid;
-    height: 100svh;
-    grid-template: 1fr 6fr / 1fr 4fr;
-    gap: .1rem;
+  font-size: 14px;
+  margin: 0;
+  display: grid;
+  height: 100svh;
+  grid-template: 1fr 6fr;
+  gap: 0.1rem;
+  position: relative;
 
-    & .appHeader {
+  & .menu {
+    min-width: min-content;
+    display: none;
+    position: sticky;
+    left: 5%;
+    bottom: 1rem;
+    border-radius: 5%;
+    box-shadow: 2px 2px 8px 3px black;
+    width: 25%;
+    background-color: burlywood;
+    z-index: 1001;
+    text-align: center;
+    padding: 1rem;
+
+    & .closeNewNoteDialog {
+      position: absolute;
+      right: 1rem;
+    }
+
+    & .errorMsg {
+      position: absolute;
+      top: 60px;
+    }
+
+    & #newTodoNote {
+      & fieldset {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border: none;
+      }
+    }
+  }
+
+  & .allProjects {
+    grid-area: 1 / 2 / -1 / -1;
+    // position: relative;
+
+    & .allProjectsHeader {
+      display: flex;
+      justify-content: space-between;
+
+      & .appHeader {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: .5rem;
+        // padding: 1rem;
+        padding-right: 3rem;
         text-shadow: 2px 2px 4px blue;
-    }
+      }
 
-    & .menu {
-        position: relative;
-        grid-area: 2 / 1 / -1 / 2;
-        padding: 1rem;
+      & .projectsNavBtns {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        // gap: 1rem;
 
-        & .errorMsg {
+        & button.projectBtn {
+          border: none;
+          cursor: pointer;
+          height: 40px;
+          width: 120px;
+          border-radius: 12px 12px 0px 0px;
+          position: relative;
+
+          & .delBtnForProject {
             position: absolute;
-            top: 60px;
+            top: 10%;
+            right: 5%;
+            border-radius: 30%;
+          }
         }
-
-        & #newTodoNote {
-
-            & fieldset {
-                display: flex;
-                flex-direction: column;
-                gap:1rem;
-                border: none;
-            }
-        }
+      }
     }
 
-    & .allProjects {
-        grid-area: 1 / 2 / -1 / -1;
+    & .editNoteModal {
+      //   border: 2px solid green;
+      //   position: relative;
+      //   right: 0;
+      //   //   height: 100vh;
+      //   width: 30%;
 
-        & .allProjectsHeader {
-            // border: 1px solid black;
-
-            & .projectsNavBtns {
-                display: flex;
-                justify-content: flex-start;
-                align-items:center;
-                // gap: 1rem;
-
-                & button.projectBtn {
-                    border: none;
-                    cursor: pointer;
-                    height: 40px;
-                    width: 120px;
-                    border-radius: 12px 12px 0px 0px;
-                    position: relative;
-
-                    & .delBtnForProject {
-                        position: absolute;
-                        top:10%;
-                        right: 5%;
-                        border-radius: 30%;
-
-                    }
-        
-                }
-            }
+      & .editDialog {
+        & #editTodoNoteForm > * > div:not(.input:has([type="radio"])) {
+          display: flex;
+          flex-direction: column;
         }
-
-        & .editNoteModal {
-
-            & .editDialog {
-
-                & #editTodoNoteForm > * > div:not(.input:has([type='radio'])){
-                
-                    display: flex;
-                    flex-direction: column;
-                }
-            }
-        }
-
-        & .ProjectTodoNotes {
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-            padding: 1rem;
-
-            & .nothingToDoH1 {
-                opacity: .3;
-             
-            }
-
-            & .todoDiv {
-                // background: no-repeat url('./img/pending.svg') center;
-                // box-shadow: 1px 1px 4px black;
-                padding: 1rem;
-                position: relative;
-
-                .delNoteBtn {
-                    position: absolute;
-                    top: 2%;
-                    right: 5%;
-                }
-            }
-        }
+      }
     }
+
+    & .ProjectTodoNotes {
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+
+      & .nothingToDoH1 {
+        opacity: 0.3;
+      }
+
+      & .todoDiv {
+        // background: no-repeat url('./img/pending.svg') center;
+        // box-shadow: 1px 1px 4px black;
+        padding: 1rem;
+        position: relative;
+
+        .delNoteBtn {
+          position: absolute;
+          top: 2%;
+          right: 5%;
+        }
+      }
+    }
+  }
 }
