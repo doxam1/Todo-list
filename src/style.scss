@@ -9,9 +9,10 @@ body {
 
   & .menu {
     min-width: min-content;
-    display: none;
-    position: sticky;
-    left: 5%;
+    // display: none;
+    position: fixed;
+    // left: 5%;
+    left: -400px;
     bottom: 1rem;
     border-radius: 5%;
     box-shadow: 2px 2px 8px 3px black;
@@ -20,6 +21,7 @@ body {
     z-index: 1001;
     text-align: center;
     padding: 2rem;
+    transition: left 1s ease-in-out;
 
     & .closeNewNoteDialog {
       position: absolute;

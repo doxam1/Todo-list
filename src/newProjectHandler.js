@@ -32,7 +32,7 @@ addNewProjectBtn.addEventListener("click", (e) => {
   localStorage.setItem("AllTodoNotes", JSON.stringify(Todo.allTodosNotes));
   AddToProject(Todo.allTodosNotes[Todo.allTodosNotes.length - 1]);
   document.querySelector(`.${projectName.value}`).click(); // click is working.
-  document.querySelector(".menu").style.display = "none";
+  document.querySelector(".menu").style.left = "-400px";
 
   // delete form after submiting new note to project.
   NewProjectTitle.value = "";
